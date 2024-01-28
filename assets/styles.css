@@ -48,3 +48,21 @@ h1 {
 .search-container button:hover {
     background-color: #0056b3;
 }
+
+/* Footer Section */
+
+.footer-content {
+    text-align: center;
+    padding: 20px;
+    background-color: #333;
+    color: white;
+}
+
+.footer-content a {
+    color: #0099ff;
+    text-decoration: none;
+}
+
+.footer-content a:hover {
+    text-decoration: underline;
+}
