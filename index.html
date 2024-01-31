@@ -3,11 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Header/Footer Test</title>
+    <title>Daily Task App</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <!-- Header Section-->
+    <!-- Header Section -->
     <header>
       <nav class="navbar">
         <a href="/" class="logo">
@@ -17,18 +17,81 @@
           <input type="text" placeholder="Search..." name="search" />
           <button type="submit">Search</button>
         </div>
+        <button id="createTaskButton" class="createTaskButton">Create Task</button>
       </nav>
     </header>
 
-    <!-- Main Content Section-->
+    <!-- Task Form Section -->
+    <div id="taskModal" class="modal">
+      <div class="modal-content">
+        <span class="close-button" onclick="closeTaskForm()">&times;</span>
+        <!-- &times creates the X for closing the modal  -->
+        <h1>Add Task</h1>
+        <form id="taskForm">
+          <label for="categoryName">Category Name:</label>
+          <input
+            type="text"
+            id="categoryName"
+            name="categoryName"
+            required
+          /><br /><br />
+
+          <label for="activityName">Activity Type:</label>
+          <input
+            type="text"
+            id="activityName"
+            name="activityName"
+            required
+          /><br /><br />
+
+          <label for="taskName">Task Name:</label>
+          <input
+            type="text"
+            id="taskName"
+            name="taskName"
+            required
+          /><br /><br />
+
+          <label for="taskDescription">Task Description:</label>
+          <textarea id="taskDescription" name="taskDescription"></textarea
+          ><br /><br />
+
+          <label>Days of the Week:</label><br />
+          <input type="checkbox" id="sunday" name="days[]" value="sunday" />
+          <label for="sunday">Sunday</label><br />
+          <input type="checkbox" id="monday" name="days[]" value="monday" />
+          <label for="monday">Monday</label><br />
+          <input type="checkbox" id="tuesday" name="days[]" value="tuesday" />
+          <label for="tuesday">Tuesday</label><br />
+          <input
+            type="checkbox"
+            id="wednesday"
+            name="days[]"
+            value="wednesday"
+          />
+          <label for="wednesday">Wednesday</label><br />
+          <input type="checkbox" id="thursday" name="days[]" value="thursday" />
+          <label for="thursday">Thursday</label><br />
+          <input type="checkbox" id="friday" name="days[]" value="friday" />
+          <label for="friday">Friday</label><br />
+          <input type="checkbox" id="saturday" name="days[]" value="saturday" />
+          <label for="saturday">Saturday</label><br />
+          <br />
+          <input type="submit" value="Create Task" />
+        </form>
+      </div>
+    </div>
+
+    <!-- Main Content Section -->
     <div class="main-content"></div>
 
-    <!-- Footer Section-->
+    <!-- Footer Section -->
     <footer>
       <div class="footer-content">
         <a
           href="https://github.com/chingu-voyages/v47-tier1-team-05"
           target="_blank"
+          rel="noopener"
           >DOMinators Repo</a
         >
       </div>
