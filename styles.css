@@ -45,6 +45,54 @@ body {
   background-color: #0056b3;
 }
 
+.createTaskButton {
+    padding: 10px 20px;
+    background-color: #ff0000;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.createTaskButton:hover {
+    background-color: #cc0000;
+}
+
+/* Modal container and content */
+
+.modal {
+    display: none; /* Hidden until Create Task is selected */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); 
+    z-index: 1;
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 400px;
+    position: relative;
+}
+
+.close-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 10px;
+    cursor: pointer;
+}
+
+
+
+
+
 /* Main Section */
 
 .main-content {
