@@ -68,6 +68,8 @@ body {
   justify-content: space-between;
 }
 .activityName{
+  display: flex;
+  flex-direction: row;
   background-color: rgb(218, 214, 222);
   padding: 0.25em;
 }
@@ -84,14 +86,14 @@ body {
 #days-of-month{
   display:flex;
   flex-direction: row;
-  border: solid 1px red;
+  border: solid 1px rgb(139, 126, 126);
   min-width: 45%;
   /* min-height: 100%; */
 }
 #days-of-week{
   display:flex;
   flex-direction: row;
-  border: solid 1px red;
+  border: solid 1px rgb(79, 69, 69);
   min-height: 10px;
   min-width: 45%;
   font-size: x-small;
@@ -104,7 +106,21 @@ body {
 .days-month{
   display: flex;
   flex-direction: column-reverse;
-  border: solid 1px red;
+  font-size: 0.85rem;
+  padding: 3px;
+  border: solid 1px rgb(71, 67, 67);
+}
+button{
+  background-color: rgb(169, 132, 203);
+  border:none;
+}
+
+.fa-trash-can{
+  color:rgb(169, 132, 203);
+}
+.fa-trash-can:hover,
+.fa-trash-can:active{
+  color: #000c0a;
 }
 /* .weeks{
   border: seagreen solid;

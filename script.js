@@ -10,55 +10,57 @@ let myDailyCheckList = JSON.parse(localStorage.getItem("myTasks"))
 console.log(myDailyCheckList)
 console.log("extra", myDailyCheckList[2].categoryName)
 console.log("activities", myDailyCheckList[0].activityTypes.Tasks)
-
+// adding id
+let checklistWithId = myDailyCheckList.map((item, index) => {
+   return{
+      id: index + 1,
+      ...item
+   }
+});
+console.log("id", checklistWithId)
+// adding id
 let checkList = "";
 myDailyCheckList.forEach(element => {
     checkList += `<div id="category">
                     <div class="categoryName">
                        <div>${element.categoryName}</div>
-                       <button id="delete"><i class="fa-solid fa-trash-can"></i></button>
+                       <button class="delete" onclick="eraseData()"><i class="fa-solid fa-trash-can"></i></button>
                      </div>
                      </div>`
     console.log(element.activityTypes, "length", element.activityTypes.length )
            for (let j = 0; j < element.activityTypes.length; j++){
               checkList += 
-                          `<div class="activityName">${element.activityTypes[j].activityName}</div>`
+                          `<div class="activityName">
+                          <div>${element.activityTypes[j].activityName}</div>
+                          <button class="delete" onclick="eraseData()"><i class="fa-solid fa-trash-can"></i></button>
+                          </div>`
             for(let i = 0; i < element.activityTypes[j].Tasks.length; i++ ){
               checkList += 
                          `<div class="tasks">
                             <div class="days">${element.activityTypes[j].Tasks[i].days}</div>
                             <div class="taskName">${element.activityTypes[j].Tasks[i].taskName}</div>  
+                            <button class="delete" onclick="eraseData()"><i class="fa-solid fa-trash-can"></i></button>
                          </div>
             `
         }
         
     }
-    
-
-
 });
+
+
 
 
 document.getElementById("initial-matrix").innerHTML = checkList
 // const deleteBtn = document.getElementsByClassName("delete");
 // for(let i = 0;  i < deleteBtn.length; i++){
-//     deleteBtn[i].addEventListener("click", eraseData)
+//     deleteBtn[i].addEventListener("onclick", eraseData)
 // }
 
-// function eraseData() {
-//    console.log("removed") 
-// }
+function eraseData() {
+   console.log("removed") 
+}
 
-// let checkList = "";
-// for (let i = 0; i < myDailyCheckList.length; i++) {
-//     checkList += `<div class="categoryName">${myDailyCheckList[i].categoryName}</div>`
-
-//     for (let j = 0; j < myDailyCheckList[j].activityTypes.length; j++){
-//         checkList += 
-//         `
-//         <div>${myDailyCheckList[j].activityTypes[j].activityName}</div>`
-//     }
-//   }
+// Calendar Days
 const d = new Date();
 const year = d.getFullYear();
 const month = d.getMonth();
