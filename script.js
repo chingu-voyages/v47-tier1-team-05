@@ -15,17 +15,31 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
 
-  // Function to save the task to local storage
-  function saveTaskToLocalStorage(task) {
-      // Retrieve tasks from local storage if any have been made
-      let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+  // New Function to save the task to local storage
+function saveTaskToLocalStorage(task) {
+  // Retrieve tasks from local storage if any have been made
+  let tasks = JSON.parse(localStorage.getItem("myTasks")) || [];
 
-      // Pushes new task to the retrieved array
+  // Check if the category already exists
+  let categoryIndex = tasks.findIndex(t => t.categoryName === task.categoryName);
+  if (categoryIndex !== -1) {
+      // Check if the activity type already exists within the category
+      let activityIndex = tasks[categoryIndex].activityTypes.findIndex(a => a.activityName === task.activityTypes[0].activityName);
+      if (activityIndex !== -1) {
+          // Activity type exists, push the new task
+          tasks[categoryIndex].activityTypes[activityIndex].Tasks.push(task.activityTypes[0].Tasks[0]);
+      } else {
+          // Activity type doesn't exist, add the new activity type with the task
+          tasks[categoryIndex].activityTypes.push(task.activityTypes[0]);
+      }
+  } else {
+      // Category doesn't exist, push the whole new task structure
       tasks.push(task);
-
-      // Places the updated tasks array back in to local storage
-      localStorage.setItem("tasks", JSON.stringify(tasks));
   }
+
+  // Places the updated tasks array back into local storage
+  localStorage.setItem("myTasks", JSON.stringify(tasks));
+}
 
   const taskForm = document.getElementById("taskForm");
   taskForm.addEventListener("submit", function (event) {
