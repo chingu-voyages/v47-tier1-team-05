@@ -46,48 +46,48 @@ body {
 }
 
 .createTaskButton {
-    padding: 10px 20px;
-    background-color: #ff0000;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+  padding: 10px 20px;
+  background-color: #ff0000;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 .createTaskButton:hover {
-    background-color: #cc0000;
+  background-color: #cc0000;
 }
 
 /* Modal container and content */
 
 .modal {
-    display: none; /* Hidden until Create Task is selected */
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7); 
-    z-index: 1;
+  display: none; /* Hidden until Create Task is selected */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 1;
 }
 
 /* Style for the modal content */
 .modal-content {
-  background-color: #ffffff; 
+  background-color: #ffffff;
   margin: 10% auto;
   padding: 25px;
-  border: 1px solid #dddddd; 
+  border: 1px solid #dddddd;
   width: 80%;
   max-width: 400px;
   position: relative;
-  border-radius: 10px; 
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); 
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 
 /* Columns for days of the week */
 .columns {
-  column-count: 3; 
-  column-gap: 20px; 
+  column-count: 3;
+  column-gap: 20px;
 }
 
 .close-button {
@@ -96,17 +96,17 @@ body {
   right: 10px;
   padding: 10px;
   cursor: pointer;
-  font-size: 20px; 
+  font-size: 20px;
   color: #555;
 }
 
 .close-button:hover {
-  color: #ff0000; 
+  color: #ff0000;
 }
 
 .modal-content h1 {
   font-size: 24px;
-  margin-bottom: 20px; 
+  margin-bottom: 20px;
 }
 
 /* Style for form */
@@ -115,8 +115,8 @@ body {
   font-weight: bold;
   margin-bottom: 8px;
   display: inline-block;
-    margin-right: 10px;
-    white-space: nowrap; 
+  margin-right: 10px;
+  white-space: nowrap;
 }
 
 .modal-content input[type="text"],
@@ -124,13 +124,13 @@ body {
   width: 100%;
   padding: 10px;
   margin-bottom: 20px;
-  border: 1px solid #ddd; 
-  border-radius: 5px; 
+  border: 1px solid #ddd;
+  border-radius: 5px;
 }
 
 .modal-content input[type="submit"] {
-  background-color: #007bff; 
-  color: #fff; 
+  background-color: #007bff;
+  color: #fff;
   border: none;
   border-radius: 5px;
   padding: 10px 20px;
@@ -138,12 +138,8 @@ body {
 }
 
 .modal-content input[type="submit"]:hover {
-  background-color: #0056b3; 
+  background-color: #0056b3;
 }
-
-
-
-
 
 /* Main Section */
 
@@ -155,43 +151,56 @@ body {
   min-height: 700px;
 }
 /* initial matrix */
-.matrix{
-  display:flex;
+.matrix {
+  display: flex;
 }
-#initial-matrix{
+#initial-matrix {
   max-width: 50%;
 }
-.categoryName{
+.categoryName {
   background-color: rgb(169, 132, 203);
   padding: 0.25em;
   display: flex;
   justify-content: space-between;
 }
-.activityName{
+.activityName {
   display: flex;
   flex-direction: row;
   background-color: rgb(218, 214, 222);
   padding: 0.25em;
 }
-.tasks{
+.tasks {
   display: flex;
 }
-.taskName{
+.taskName {
   background-color: rgb(250, 246, 253);
   padding: 0.25em;
   border: 1px solid black;
   font-size: small;
   max-width: 45%;
 }
-#days-of-month{
-  display:flex;
+.task-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.task-days,
+.task-description {
+  flex: 1;
+  margin: 0;
+}
+
+#days-of-month {
+  display: flex;
   flex-direction: row;
   border: solid 1px rgb(139, 126, 126);
   min-width: 45%;
   /* min-height: 100%; */
 }
-#days-of-week{
-  display:flex;
+#days-of-week {
+  display: flex;
   flex-direction: row;
   border: solid 1px rgb(79, 69, 69);
   min-height: 10px;
@@ -199,28 +208,28 @@ body {
   font-size: x-small;
   width: 26px;
 }
-.numDays{
- /* border: solid 1px rgb(146, 151, 138); */
+.numDays {
+  /* border: solid 1px rgb(146, 151, 138); */
   width: 1.1em;
 }
-.days-month{
+.days-month {
   display: flex;
   flex-direction: column-reverse;
   font-size: 0.85rem;
   padding: 3px;
   border: solid 1px rgb(71, 67, 67);
 }
-button{
-  background-color: rgb(169, 132, 203);
-  border:none;
+button {
+  background-color: transparent;
+  border: none;
 }
 
-.fa-trash-can{
-  color:rgb(169, 132, 203);
+.fa-trash-can {
+  color: rgb(6, 6, 6);
 }
 .fa-trash-can:hover,
-.fa-trash-can:active{
-  color: #000c0a;
+.fa-trash-can:active {
+  color: #055d4f;
 }
 /* Footer Section */
 

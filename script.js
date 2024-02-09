@@ -1,175 +1,172 @@
-// Close task creation form, this code was moved to allow the modal to be closed with the 'X'
-function closeTaskForm() {
-   const modal = document.getElementById("taskModal");
-   modal.style.display = "none"; // Hide modal
-}
+// Global variables
+const weekday = ["Su", "M", "Tu", "W", "Th", "F", "Sa"];
+const arrayOfMonths = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
+
+// Main application initialization
 document.addEventListener("DOMContentLoaded", function () {
-   
-   const createTaskButton = document.getElementById("createTaskButton");
-   createTaskButton.addEventListener("click", openTaskForm);
-
-   // Open task creation form as a modal
-   function openTaskForm() {
-       const modal = document.getElementById("taskModal");
-       modal.style.display = "block"; // Show modal
-   }
-
-
-   // Function to save the task to local storage
-   function saveTaskToLocalStorage(task) {
-       // Retrieve tasks from local storage if any have been made
-       let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-
-       // Pushes new task to the retrieved array
-       tasks.push(task);
-
-       // Places the updated tasks array back in to local storage
-       localStorage.setItem("tasks", JSON.stringify(tasks));
-   }
-
-   const taskForm = document.getElementById("taskForm");
-   taskForm.addEventListener("submit", function (event) {
-       event.preventDefault();
-
-       // Get form input values
-       const categoryName = document.getElementById("categoryName").value;
-       const activityName = document.getElementById("activityName").value;
-       const taskName = document.getElementById("taskName").value;
-       const taskDescription = document.getElementById("taskDescription").value;
-       const selectedDays = Array.from(document.querySelectorAll('input[name="days[]"]:checked')).map(day => day.value);
-
-       // Create a new task object based on our chosen JSON structure
-       const newTask = {
-           "categoryName": categoryName,
-           "activityTypes": [
-               {
-                   "activityName": activityName,
-                   "Tasks": [
-                       {
-                           "taskName": taskName,
-                           "taskDescription": taskDescription,
-                           "days": selectedDays
-                       }
-                   ]
-               }
-           ]
-       };
-
-       // Save the new task to local storage
-       saveTaskToLocalStorage(newTask);
-
-     
-       alert("Task created successfully!");
-
-       // Close the form
-       closeTaskForm();
-
-       // Clear the form
-       taskForm.reset();
-   });
+  setupEventListeners();
+  loadInitialTasks();
+  displayCalendar(); 
 });
 
-
-// Use this code to console log the stored objects in the local storage array
-// const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-
-// tasks.forEach(function(task, index) {
-//     console.log(`Task ${index + 1}:`, task);
-// });
-fetch("./assets/tasks-example.json")
-.then(response => response.json())
-.then(data => {console.log(data)
-localStorage.setItem("myTasks", JSON.stringify(data)) 
-
-})
-let myDailyCheckList = JSON.parse(localStorage.getItem("myTasks"))
-
-console.log(myDailyCheckList)
-console.log("extra", myDailyCheckList[2].categoryName)
-console.log("activities", myDailyCheckList[0].activityTypes.Tasks)
-// adding id
-// let checklistWithId = myDailyCheckList.map((item, index) => {
-//    return{
-//       id: index + 1,
-//       ...item
-//    }
-// });
-// console.log("id", checklistWithId)
-// adding id
-let checkList = "";
-myDailyCheckList.forEach(element => {
-    checkList += `<div id="category">
-                    <div class="categoryName">
-                       <div>${element.categoryName}</div>
-                       <button class="delete" onclick="eraseData()"><i class="fa-solid fa-trash-can"></i></button>
-                     </div>
-                     </div>`
-    console.log(element.activityTypes, "length", element.activityTypes.length )
-           for (let j = 0; j < element.activityTypes.length; j++){
-              checkList += 
-                          `<div class="activityName">
-                          <div>${element.activityTypes[j].activityName}</div>
-                          <button class="delete" onclick="eraseData()"><i class="fa-solid fa-trash-can"></i></button>
-                          </div>`
-            for(let i = 0; i < element.activityTypes[j].Tasks.length; i++ ){
-              checkList += 
-                         `<div class="tasks">
-                            <div class="days">${element.activityTypes[j].Tasks[i].days}</div>
-                            <div class="taskName">${element.activityTypes[j].Tasks[i].taskName}</div>  
-                            <button class="delete" onclick="eraseData()"><i class="fa-solid fa-trash-can"></i></button>
-                         </div>
-            `
-        }
-        
-    }
-});
-
-
-
-
-document.getElementById("initial-matrix").innerHTML = checkList
-
-
-function eraseData() {
-   console.log("removed") 
+// Sets up event listeners in the application
+function setupEventListeners() {
+  document
+    .getElementById("createTaskButton")
+    .addEventListener("click", openTaskForm);
+  document
+    .getElementById("taskForm")
+    .addEventListener("submit", handleFormSubmit);
 }
 
-// Calendar Days
-const d = new Date();
-const year = d.getFullYear();
-const month = d.getMonth();
-const day = d.getDay();
-console.log("d", d)
-// const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]
-const weekday = ["Su","M","Tu","W","Th","F","Sa"]
-const arrayOfMonths = ["January","February","March","April","May","June","July","August","September","October","November","December"];
-let monthName =arrayOfMonths[month]
-let dayName = weekday[day]
-console.log(dayName,monthName)
-const numDaysInMonth = (y,m) => new Date(y, m, 0).getDate();
-console.log("numofdays", numDaysInMonth(year, month+1))
-let totalNumDays = numDaysInMonth(year, month+1);
-
-
-let displayDay = []
-let calendarDays = "";
-let firstDayOfMonth = "";
-const dd = new Date(`${monthName} 1, ${year}`)
-console.log("pls", dd)
-let displayMonth = []
-let calendarMonth = '';
-for(i = 1; i < (totalNumDays+1); i++){
-  displayMonth.push(i);
+// Opens the task creation modal
+function openTaskForm() {
+  document.getElementById("taskModal").style.display = "block";
 }
-displayMonth.forEach(element => {
-  let dd = new Date(`${monthName} ${element}, ${year}`)
-  let week = `${dd.toString().split('')[0]}${dd.toString().split('')[1]}`;
-  calendarMonth += 
-             `<div class="days-month">
-              <div class="numDays">${element}</div>
-              <div class="weeks">${week}</div> 
-              </div>`
-})
-console.log(displayMonth)
-document.getElementById("days-of-month").innerHTML = calendarMonth;
 
+// Closes the task creation modal
+function closeTaskForm() {
+  document.getElementById("taskModal").style.display = "none";
+}
+
+// Handles the task form submission
+function handleFormSubmit(event) {
+  event.preventDefault(); // Prevent the default form submission
+
+  const task = createTaskFromForm();
+
+  // Save the new task to local storage and update the display
+  saveTaskToLocalStorage(task);
+  displayTasks();
+
+  alert("Task created successfully!");
+
+  // Reset and close the form
+  document.getElementById("taskForm").reset();
+  closeTaskForm();
+}
+
+// Creates a task object based on form inputs
+function createTaskFromForm() {
+  const categoryName = document.getElementById("categoryName").value;
+  const activityName = document.getElementById("activityName").value;
+  const taskName = document.getElementById("taskName").value;
+  const taskDescription = document.getElementById("taskDescription").value;
+  const selectedDays = Array.from(
+    document.querySelectorAll('input[name="days[]"]:checked')
+  ).map((day) => day.value);
+
+  return {
+    categoryName,
+    activityTypes: [
+      {
+        activityName,
+        Tasks: [
+          {
+            taskName,
+            taskDescription,
+            days: selectedDays,
+          },
+        ],
+      },
+    ],
+  };
+}
+
+// Saves a task to local storage
+function saveTaskToLocalStorage(task) {
+  let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+  tasks.push(task);
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+}
+
+// Load initial tasks from JSON and display them
+function loadInitialTasks() {
+  if (!localStorage.getItem("tasks")) {
+    fetch("./assets/tasks-example.json")
+      .then((response) => response.json())
+      .then((data) => {
+        localStorage.setItem("tasks", JSON.stringify(data));
+        displayTasks();
+      })
+      .catch((error) =>
+        console.error("Failed to load tasks from JSON:", error)
+      );
+  } else {
+    displayTasks();
+  }
+}
+
+// Function to display tasks on the page
+function displayTasks() {
+  const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+  let tasksHtml = "";
+
+  tasks.forEach((task) => {
+    tasksHtml += `<div class="task-category">
+                        <h3 class="categoryName">${task.categoryName}<button class="delete" onclick="eraseData()"><i class="fa-solid fa-trash-can"></i></button></h3>
+                        `;
+    task.activityTypes.forEach((activity) => {
+      tasksHtml += `<div class="activity-type">
+                            <h4 class="activityName">${activity.activityName}<button class="delete" onclick="eraseData()"><i class="fa-solid fa-trash-can"></i></button></h4>
+                            `;
+      activity.Tasks.forEach((taskDetail) => {
+        tasksHtml += `
+                                <p class="taskName">${taskDetail.taskName} </p>
+                                <div class="task-details" >
+                                <p class="task-days">${taskDetail.days.join(
+                                  ", "
+                                )}</p>
+                                <p class="task-description">${
+                                  taskDetail.taskDescription
+                                } <i class="fa-solid fa-trash-can"></i></p>
+                                </div>
+                              `;
+      });
+      tasksHtml += `</div>`;
+    });
+    tasksHtml += `</div>`;
+  });
+
+  document.getElementById("initial-matrix").innerHTML = tasksHtml;
+}
+
+// Function to display the calendar
+function displayCalendar() {
+  const now = new Date();
+  const currentYear = now.getFullYear();
+  const currentMonth = now.getMonth();
+
+  let totalNumDays = numDaysInMonth(currentYear, currentMonth + 1);
+  let calendarMonthHtml = "";
+
+  for (let day = 1; day <= totalNumDays; day++) {
+    let date = new Date(currentYear, currentMonth, day);
+    let weekdayShortName = weekday[date.getDay()];
+
+    calendarMonthHtml += `<div class="day">
+        <div class="week">${weekdayShortName}</div>
+                                <div class="numDays">${day}</div>
+                              </div>`;
+  }
+
+  document.getElementById("days-of-month").innerHTML = calendarMonthHtml;
+}
+
+// Function to calculate the number of days in a month
+function numDaysInMonth(year, month) {
+  return new Date(year, month, 0).getDate();
+}
