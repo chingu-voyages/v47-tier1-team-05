@@ -9,7 +9,7 @@ body {
 .navbar {
   display: flex;
   align-items: center;
-  background-color: #333;
+  background-color: #e09c36;
   padding: 10px 20px;
 }
 
@@ -34,7 +34,7 @@ body {
 
 .search-container button {
   padding: 10px 20px;
-  background-color: #007bff;
+  background-color: rgb(169, 132, 203);
   color: white;
   border: none;
   border-radius: 5px;
@@ -47,7 +47,7 @@ body {
 
 .createTaskButton {
   padding: 10px 20px;
-  background-color: #ff0000;
+  background-color: rgb(169, 132, 203);
   color: white;
   border: none;
   border-radius: 5px;
@@ -236,12 +236,13 @@ button {
 .footer-content {
   text-align: center;
   padding: 20px;
-  background-color: #333;
+  background-color: #e09c36;
   color: white;
 }
 
 .footer-content a {
-  color: #0099ff;
+  color: rgb(169, 132, 203);
+  text-shadow: 1px 1px #000000;
   text-decoration: none;
 }
 
