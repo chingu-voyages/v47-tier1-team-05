@@ -41,6 +41,36 @@ function saveTaskToLocalStorage(task) {
   localStorage.setItem("myTasks", JSON.stringify(tasks));
 }
 
+ // Refresh and display tasks
+ function refreshTasksDisplay() {
+  let myDailyCheckList = JSON.parse(localStorage.getItem("myTasks")) || [];
+  let checkList = "";
+
+  myDailyCheckList.forEach(element => {
+      checkList += `<div id="category">
+                      <div class="categoryName">
+                          <div>${element.categoryName}</div>
+                          <button class="delete" onclick="eraseData()"><i class="fa-solid fa-trash-can"></i></button>
+                      </div>
+                  </div>`;
+      element.activityTypes.forEach(activityType => {
+          checkList += `<div class="activityName">
+                          <div>${activityType.activityName}</div>
+                          <button class="delete" onclick="eraseData()"><i class="fa-solid fa-trash-can"></i></button>
+                      </div>`;
+          activityType.Tasks.forEach(task => {
+              checkList += `<div class="tasks">
+                              <div class="days">${task.days.join(", ")}</div>
+                              <div class="taskName">${task.taskName}</div>  
+                              <button class="delete" onclick="eraseData()"><i class="fa-solid fa-trash-can"></i></button>
+                          </div>`;
+          });
+      });
+  });
+
+  document.getElementById("initial-matrix").innerHTML = checkList;
+}
+
   const taskForm = document.getElementById("taskForm");
   taskForm.addEventListener("submit", function (event) {
       event.preventDefault();
@@ -80,6 +110,8 @@ function saveTaskToLocalStorage(task) {
 
       // Clear the form
       taskForm.reset();
+
+      refreshTasksDisplay()
   });
 });
 
