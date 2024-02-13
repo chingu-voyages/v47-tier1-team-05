@@ -115,6 +115,60 @@ function saveTaskToLocalStorage(task) {
   });
 });
 
+  // Search functionality
+  const searchInput = document.querySelector('.search-container input[type="text"]');
+  searchInput.addEventListener("input", function() {
+    const query = this.value.toLowerCase();
+    const tasks = JSON.parse(localStorage.getItem("myTasks")) || [];
+    const filteredTasks = tasks.reduce((acc, task) => {
+        const categoryMatches = task.categoryName.toLowerCase().includes(query);
+        const activityTypesMatches = task.activityTypes.filter(activityType => {
+            return activityType.activityName.toLowerCase().includes(query) ||
+                   activityType.Tasks.some(t => t.taskName.toLowerCase().includes(query));
+        });
+
+        if (categoryMatches || activityTypesMatches.length > 0) {
+            acc.push({
+                ...task,
+                activityTypes: activityTypesMatches
+            });
+        }
+
+        return acc;
+    }, []);
+
+    displayFilteredTasks(filteredTasks);
+  });
+
+  function displayFilteredTasks(tasks) {
+    // Similar logic to refreshTasksDisplay but for filtered tasks
+    let checkList = "";
+
+    tasks.forEach(element => {
+        checkList += `<div id="category">
+                        <div class="categoryName">
+                            <div>${element.categoryName}</div>
+                            <button class="delete" onclick="eraseData()"><i class="fa-solid fa-trash-can"></i></button>
+                        </div>
+                    </div>`;
+        element.activityTypes.forEach(activityType => {
+            checkList += `<div class="activityName">
+                            <div>${activityType.activityName}</div>
+                            <button class="delete" onclick="eraseData()"><i class="fa-solid fa-trash-can"></i></button>
+                        </div>`;
+            activityType.Tasks.forEach(task => {
+                checkList += `<div class="tasks">
+                                <div class="days">${task.days.join(", ")}</div>
+                                <div class="taskName">${task.taskName}</div>  
+                                <button class="delete" onclick="eraseData()"><i class="fa-solid fa-trash-can"></i></button>
+                            </div>`;
+            });
+        });
+    });
+
+    document.getElementById("initial-matrix").innerHTML = checkList;
+  }
+
 
 // Use this code to console log the stored objects in the local storage array
 // const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
