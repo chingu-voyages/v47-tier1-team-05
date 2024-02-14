@@ -9,7 +9,7 @@ body {
 .navbar {
   display: flex;
   align-items: center;
-  background-color: #e09c36;
+  background-color: #414040;
   padding: 10px 20px;
 }
 
@@ -259,7 +259,7 @@ body {
 .footer-content {
   text-align: center;
   padding: 20px;
-  background-color: #e09c36;
+  background-color: #414040;
   color: white;
 }
 
