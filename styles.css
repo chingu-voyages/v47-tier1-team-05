@@ -55,7 +55,7 @@ body {
 }
 
 .createTaskButton:hover {
-  background-color: #cc0000;
+  background-color: #2e0457;
 }
 
 /* Modal container and content */
@@ -149,17 +149,41 @@ body {
   background-repeat: no-repeat;
   background-position: center;
   min-height: 700px;
+  width: 100%;
 }
-/* initial matrix */
-.matrix {
+
+.matrix-title-days {
   display: flex;
 }
-#initial-matrix {
-  max-width: 50%;
+.matrix{
+  display: flex;
 }
+#title-days{
+  display: flex;
+  flex-direction: row;
+  border: solid 1px rgb(139, 126, 126);
+  width:100%;
+  height: 100%;
+}
+#initial-matrix{
+  width: 35%;
+}
+#matrix-title {
+  width: 35%;
+  /* border: #cc0000 5px solid; */
+}
+#matrix-title > p{
+  margin: 0;
+  font-size: 0.85em;
+  padding-top: 0.65em;
+  align-self: center;
+  /* font-weight: bold; */
+}
+
 .categoryName {
   background-color: rgb(169, 132, 203);
-  padding: 0.25em;
+  font-size: 1rem;
+  padding: 0.5em 0;
   display: flex;
   justify-content: space-between;
 }
@@ -182,19 +206,15 @@ body {
   width: 90%;
 }
 .days{
-  width: 40%;
+  width: 30%;
   padding: 5px;
-  font-size: smaller;
+  font-size: 0.5em;
   text-transform: capitalize;
-  overflow-x: scroll;
-  /* overflow-wrap:anywhere;  */
 }
 .taskName {
-  /* background-color: rgb(250, 246, 253); */
   padding: 5px;
-  /* border: 1px solid black; */
-  font-size: smaller;
-  width: 60%;
+  font-size: 0.5em;
+  width: 70%;
 }
 .task-details {
   display: flex;
@@ -209,12 +229,12 @@ body {
   margin: 0;
 }
 
-#days-of-month {
+#days-of-month{
   display: flex;
   flex-direction: row;
   border: solid 1px rgb(139, 126, 126);
-  min-width: 45%;
-  /* min-height: 100%; */
+  padding: 0;
+  width:100%;
 }
 #days-of-week {
   display: flex;
@@ -226,8 +246,15 @@ body {
   width: 26px;
 }
 .numDays {
-  /* border: solid 1px rgb(146, 151, 138); */
   width: 1.1em;
+  margin-top: 0;
+  font-size: 0.75em;
+  font-weight: bold;
+}
+.weeks{
+  padding: 0;
+  font-size: 0.75em;
+  font-weight: bold;
 }
 .days-month {
   display: flex;
@@ -238,8 +265,8 @@ body {
 }
 .empty-column{
   background-color:rgba(251, 212, 14, 0.945);
-  font-size: x-small;
-  padding:3px;
+  font-size:x-small;
+  padding:0.15em;
 }
 .delete {
   background-color: transparent;
