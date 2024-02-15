@@ -4,114 +4,130 @@ function closeTaskForm() {
   modal.style.display = "none"; // Hide modal
 }
 document.addEventListener("DOMContentLoaded", function () {
-  
-  const createTaskButton = document.getElementById("createTaskButton");
-  createTaskButton.addEventListener("click", openTaskForm);
+  const createTaskButton = document.getElementById('createTaskButton');
+  createTaskButton.addEventListener('click', openTaskForm);
 
   // Open task creation form as a modal
   function openTaskForm() {
-      const modal = document.getElementById("taskModal");
-      modal.style.display = "block"; // Show modal
+    const modal = document.getElementById('taskModal');
+    modal.style.display = 'block'; // Show modal
   }
 
+  //   Open edit task modal
+  function openEditModal() {
+    const editModal = document.getElementById('editModal');
+    editModal.style.display = 'block'; // Show modal
+  }
+    
+
+    
+    
+    
 
   // New Function to save the task to local storage
-function saveTaskToLocalStorage(task) {
-  // Retrieve tasks from local storage if any have been made
-  let tasks = JSON.parse(localStorage.getItem("myTasks")) || [];
+  function saveTaskToLocalStorage(task) {
+    // Retrieve tasks from local storage if any have been made
+    let tasks = JSON.parse(localStorage.getItem('myTasks')) || [];
 
-  // Check if the category already exists
-  let categoryIndex = tasks.findIndex(t => t.categoryName === task.categoryName);
-  if (categoryIndex !== -1) {
+    // Check if the category already exists
+    let categoryIndex = tasks.findIndex(
+      (t) => t.categoryName === task.categoryName
+    );
+    if (categoryIndex !== -1) {
       // Check if the activity type already exists within the category
-      let activityIndex = tasks[categoryIndex].activityTypes.findIndex(a => a.activityName === task.activityTypes[0].activityName);
+      let activityIndex = tasks[categoryIndex].activityTypes.findIndex(
+        (a) => a.activityName === task.activityTypes[0].activityName
+      );
       if (activityIndex !== -1) {
-          // Activity type exists, push the new task
-          tasks[categoryIndex].activityTypes[activityIndex].Tasks.push(task.activityTypes[0].Tasks[0]);
+        // Activity type exists, push the new task
+        tasks[categoryIndex].activityTypes[activityIndex].Tasks.push(
+          task.activityTypes[0].Tasks[0]
+        );
       } else {
-          // Activity type doesn't exist, add the new activity type with the task
-          tasks[categoryIndex].activityTypes.push(task.activityTypes[0]);
+        // Activity type doesn't exist, add the new activity type with the task
+        tasks[categoryIndex].activityTypes.push(task.activityTypes[0]);
       }
-  } else {
+    } else {
       // Category doesn't exist, push the whole new task structure
       tasks.push(task);
+    }
+
+    // Places the updated tasks array back into local storage
+    localStorage.setItem('myTasks', JSON.stringify(tasks));
   }
 
-  // Places the updated tasks array back into local storage
-  localStorage.setItem("myTasks", JSON.stringify(tasks));
-}
+  // Refresh and display tasks
+  function refreshTasksDisplay() {
+    let myDailyCheckList = JSON.parse(localStorage.getItem('myTasks')) || [];
+    let checkList = '';
 
- // Refresh and display tasks
- function refreshTasksDisplay() {
-  let myDailyCheckList = JSON.parse(localStorage.getItem("myTasks")) || [];
-  let checkList = "";
-
-  myDailyCheckList.forEach(element => {
+    myDailyCheckList.forEach((element) => {
       checkList += `<div id="category">
                       <div class="categoryName">
                           <div>${element.categoryName}</div>
                           <button class="delete" onclick="eraseData()"><i class="fa-solid fa-trash-can"></i></button>
                       </div>
                   </div>`;
-      element.activityTypes.forEach(activityType => {
-          checkList += `<div class="activityName">
+      element.activityTypes.forEach((activityType) => {
+        checkList += `<div class="activityName">
                           <div>${activityType.activityName}</div>
                           <button class="delete" onclick="eraseData()"><i class="fa-solid fa-trash-can"></i></button>
                       </div>`;
-          activityType.Tasks.forEach(task => {
-              checkList += `<div class="tasks">
-                              <div class="days">${task.days.join(", ")}</div>
+        activityType.Tasks.forEach((task) => {
+          checkList += `<div class="tasks">
+                              <div class="days">${task.days.join(', ')}</div>
                               <div class="taskName">${task.taskName}</div>  
                               <button class="delete" onclick="eraseData()"><i class="fa-solid fa-trash-can"></i></button>
                           </div>`;
-          });
+        });
       });
-  });
+    });
 
-  document.getElementById("initial-matrix").innerHTML = checkList;
-}
+    document.getElementById('initial-matrix').innerHTML = checkList;
+  }
 
-  const taskForm = document.getElementById("taskForm");
-  taskForm.addEventListener("submit", function (event) {
-      event.preventDefault();
+  const taskForm = document.getElementById('taskForm');
+  taskForm.addEventListener('submit', function (event) {
+    event.preventDefault();
 
-      // Get form input values
-      const categoryName = document.getElementById("categoryName").value;
-      const activityName = document.getElementById("activityName").value;
-      const taskName = document.getElementById("taskName").value;
-      const taskDescription = document.getElementById("taskDescription").value;
-      const selectedDays = Array.from(document.querySelectorAll('input[name="days[]"]:checked')).map(day => day.value);
+    // Get form input values
+    const categoryName = document.getElementById('categoryName').value;
+    const activityName = document.getElementById('activityName').value;
+    const taskName = document.getElementById('taskName').value;
+    const taskDescription = document.getElementById('taskDescription').value;
+    const selectedDays = Array.from(
+      document.querySelectorAll('input[name="days[]"]:checked')
+    ).map((day) => day.value);
 
-      // Create a new task object based on our chosen JSON structure
-      const myTasks = {
-          "categoryName": categoryName,
-          "activityTypes": [
-              {
-                  "activityName": activityName,
-                  "Tasks": [
-                      {
-                          "taskName": taskName,
-                          "taskDescription": taskDescription,
-                          "days": selectedDays
-                      }
-                  ]
-              }
-          ]
-      };
+    // Create a new task object based on our chosen JSON structure
+    const myTasks = {
+      categoryName: categoryName,
+      activityTypes: [
+        {
+          activityName: activityName,
+          Tasks: [
+            {
+              taskName: taskName,
+              taskDescription: taskDescription,
+              days: selectedDays,
+            },
+          ],
+        },
+      ],
+    };
 
-      // Save the new task to local storage
-      saveTaskToLocalStorage(myTasks);
+    // Save the new task to local storage
+    saveTaskToLocalStorage(myTasks);
 
-    
-      alert("Task created successfully!");
+    alert('Task created successfully!');
 
-      // Close the form
-      closeTaskForm();
+    // Close the form
+    closeTaskForm();
 
-      // Clear the form
-      taskForm.reset();
+    // Clear the form
+    taskForm.reset();
 
-      refreshTasksDisplay()
+    refreshTasksDisplay();
   });
 });
 
@@ -162,6 +178,7 @@ myDailyCheckList.forEach(element => {
                         `<div class="tasks">
                            <div class="days">${element.activityTypes[j].Tasks[i].days}</div>
                            <div class="taskName">${element.activityTypes[j].Tasks[i].taskName}</div>  
+                           <button class="edit" onclick="editModal()"><i class="fa-solid fa-pen-to-square"></i></button>
                            <button class="delete" onclick="eraseData()"><i class="fa-solid fa-trash-can"></i></button>
                         </div>
            `
