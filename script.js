@@ -204,15 +204,27 @@ myDailyCheckList.forEach((element, index) => {
                          <button class="delete" onclick="eraseData(${index}, ${j})"><i class="fa-solid fa-trash-can"></i></button>
                          </div>`
            for(let i = 0; i < element.activityTypes[j].Tasks.length; i++ ){
-             checkList += 
+             
+           if(element.activityTypes[j].Tasks[i].days.length > 2){
+            let daysLength = element.activityTypes[j].Tasks[i].days.length
+           checkList += `<div class="tasks">
+                           <div class="day-tasks">
+                             <div class="days">${element.activityTypes[j].Tasks[i].days[0]}-${element.activityTypes[j].Tasks[i].days[daysLength-1]}</div>
+                             <div class="taskName">${element.activityTypes[j].Tasks[i].taskName}</div> 
+                           </div> 
+                           <button class="delete" onclick="eraseData(${index}, ${j}, ${i})"><i class="fa-solid fa-trash-can"></i></button>
+                         </div>`
+           }
+           else {
+            checkList += 
                         `<div class="tasks">
                           <div class="day-tasks">
                            <div class="days">${element.activityTypes[j].Tasks[i].days}</div>
                            <div class="taskName">${element.activityTypes[j].Tasks[i].taskName}</div> 
                           </div> 
                            <button class="delete" onclick="eraseData(${index}, ${j}, ${i})"><i class="fa-solid fa-trash-can"></i></button>
-                        </div>
-           `
+                        </div>`
+           }
        }  
    }
 });
@@ -236,12 +248,12 @@ function eraseData(categoryIndex, activityIndex, taskIndex) {
 function renderChecklist(){
     let checkListHTML = "";
     myDailyCheckList.forEach((element, index) => {
-        checkListHTML += `<div id="category">
+        checkListHTML += `
                         <div class="categoryName">
                            <div>${element.categoryName}</div>
                            <button class="delete" onclick="eraseData(${index})"><i class="fa-solid fa-trash-can"></i></button>
                          </div>
-                         </div>`
+                         `
         console.log(element.activityTypes, "length", element.activityTypes.length )
                for (let j = 0; j < element.activityTypes.length; j++){
                 checkListHTML += 
@@ -250,12 +262,26 @@ function renderChecklist(){
                               <button class="delete" onclick="eraseData(${index}, ${j})"><i class="fa-solid fa-trash-can"></i></button>
                               </div>`
                 for(let i = 0; i < element.activityTypes[j].Tasks.length; i++ ){
-                    checkListHTML += 
-                             `<div class="tasks">
-                                <div class="days">${element.activityTypes[j].Tasks[i].days}</div>
-                                <div class="taskName">${element.activityTypes[j].Tasks[i].taskName}</div>  
-                                <button class="delete" onclick="eraseData(${index}, ${j}, ${i})"><i class="fa-solid fa-trash-can"></i></button>
-                             </div>`
+                    if(element.activityTypes[j].Tasks[i].days.length > 2){
+                        let daysLength = element.activityTypes[j].Tasks[i].days.length
+                       checkListHTML += `<div class="tasks">
+                                       <div class="day-tasks">
+                                         <div class="days">${element.activityTypes[j].Tasks[i].days[0]}-${element.activityTypes[j].Tasks[i].days[daysLength-1]}</div>
+                                         <div class="taskName">${element.activityTypes[j].Tasks[i].taskName}</div> 
+                                       </div> 
+                                       <button class="delete" onclick="eraseData(${index}, ${j}, ${i})"><i class="fa-solid fa-trash-can"></i></button>
+                                     </div>`
+                       }
+                       else {
+                        checkListHTML += 
+                                    `<div class="tasks">
+                                      <div class="day-tasks">
+                                       <div class="days">${element.activityTypes[j].Tasks[i].days}</div>
+                                       <div class="taskName">${element.activityTypes[j].Tasks[i].taskName}</div> 
+                                      </div> 
+                                       <button class="delete" onclick="eraseData(${index}, ${j}, ${i})"><i class="fa-solid fa-trash-can"></i></button>
+                                    </div>`
+                       }
             }  
         }
      });
@@ -298,17 +324,20 @@ displayMonth.forEach(element => {
  
  calendarMonth += 
             `<div class="days-month">
-             <div class="numDays">${element}</div>
              <div class="weeks">${week}</div> 
+             <div class="numDays">${element}</div>
              </div>`
     if(week === 'Su' && i != totalNumDays){
         currentWeek++;
         calendarMonth += `<div class="empty-column">
-                        <div class="numDays">Wk</div>    
-                        <div class="weeks">${currentWeek}</div>
+                           <div class="numDays">Wk</div>    
+                           <div class="weeks">${currentWeek}</div>
                           </div>`
                         }
     
 })
-
+let monthAndYear = '';
+monthAndYear = `<p>My Daily CheckList ${" "} - ${monthName} ${year}</p>`
 document.getElementById("days-of-month").innerHTML = calendarMonth;
+document.getElementById("matrix-title").innerHTML = monthAndYear;
+document.getElementById("title-days").innerHTML = calendarMonth;
