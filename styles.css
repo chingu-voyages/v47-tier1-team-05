@@ -2,6 +2,7 @@ body {
   margin: 0;
   box-sizing: border-box;
   font-family: Arial, sans-serif;
+  border: 2px solid yellowgreen;
 }
 
 /* Header Section */
@@ -151,13 +152,17 @@ body {
   min-height: 700px;
   width: 100%;
 }
-
-.matrix-title-days {
+.matrix-title-days{
   display: flex;
+  flex-direction: row;
 }
 .matrix{
-  display: flex;
+   min-width: 30%;
 }
+.calendar{
+  min-width: 70%;
+}
+
 #title-days{
   display: flex;
   flex-direction: row;
@@ -165,19 +170,16 @@ body {
   width:100%;
   height: 100%;
 }
-#initial-matrix{
-  width: 35%;
-}
+
 #matrix-title {
-  width: 35%;
-  /* border: #cc0000 5px solid; */
-}
+  padding: 0.20em 0;
+} 
 #matrix-title > p{
   margin: 0;
   font-size: 0.85em;
   padding-top: 0.65em;
   align-self: center;
-  /* font-weight: bold; */
+ 
 }
 
 .categoryName {
@@ -202,7 +204,6 @@ body {
 .day-tasks{
   display: flex;
   flex-direction: row;
-  /* border: 1px solid rgb(138, 59, 72); */
   width: 90%;
 }
 .days{
@@ -262,6 +263,7 @@ body {
   font-size: 0.85rem;
   padding: 3px;
   border: solid 1px rgb(71, 67, 67);
+  background-color: rgb(169, 132, 203);
 }
 .empty-column{
   background-color:rgba(251, 212, 14, 0.945);
@@ -299,3 +301,48 @@ body {
 .footer-content a:hover {
   text-decoration: underline;
 }
+
+/* Media Queries */
+
+/* @media (min-width: 768px) {
+  .matrix-title-days{
+    width:100%;
+  }
+  
+  #matrix-title {
+    min-width: 35%;
+    
+  }
+  #matrix-title > p{
+    margin: 0;
+    font-size: 0.5em;
+    padding-top: 0.25em;
+    align-self: center;
+   
+  }
+  .title-days{
+    min-width: 65%;
+  }
+ 
+}
+@media (max-width: 975px) {
+  .matrix-title-days{
+    width:100%;
+  }
+  
+  #matrix-title {
+    min-width: 35%;
+    
+  }
+  #matrix-title > p{
+    margin: 0;
+    font-size: 0.5em;
+    padding-top: 0.25em;
+    align-self: center;
+    
+  }
+  .title-days{
+    min-width: 65%;
+  }
+ 
+}  */
