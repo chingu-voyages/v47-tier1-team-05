@@ -205,11 +205,11 @@ console.log("extra", myDailyCheckList[2].categoryName)
 console.log("activities", myDailyCheckList[0].activityTypes.Tasks)
 
 let checkList = "";
-myDailyCheckList.forEach((element, index) => {
+myDailyCheckList.forEach(element => {
    checkList += `<div id="category">
                    <div class="categoryName">
                       <div>${element.categoryName}</div>
-                      <button class="delete" onclick="eraseData(${index})"><i class="fa-solid fa-trash-can"></i></button>
+                      <button class="delete" onclick="eraseData()"><i class="fa-solid fa-trash-can"></i></button>
                     </div>
                     </div>`
    console.log(element.activityTypes, "length", element.activityTypes.length )
@@ -217,26 +217,12 @@ myDailyCheckList.forEach((element, index) => {
              checkList += 
                          `<div class="activityName">
                          <div>${element.activityTypes[j].activityName}</div>
-                         <button class="delete" onclick="eraseData(${index}, ${j})"><i class="fa-solid fa-trash-can"></i></button>
+                         <button class="delete" onclick="eraseData()"><i class="fa-solid fa-trash-can"></i></button>
                          </div>`
            for(let i = 0; i < element.activityTypes[j].Tasks.length; i++ ){
-             
-           if(element.activityTypes[j].Tasks[i].days.length > 2){
-            let daysLength = element.activityTypes[j].Tasks[i].days.length
-           checkList += `<div class="tasks">
-                           <div class="day-tasks">
-                             <div class="days">${element.activityTypes[j].Tasks[i].days[0]}-${element.activityTypes[j].Tasks[i].days[daysLength-1]}</div>
-                             <div class="taskName">${element.activityTypes[j].Tasks[i].taskName}</div> 
-                           </div> 
-                           <button class="delete" onclick="eraseData(${index}, ${j}, ${i})"><i class="fa-solid fa-trash-can"></i></button>
-                         </div>`
-           }
-           else {
-            checkList += 
+             checkList += 
                         `<div class="tasks">
-                          <div class="day-tasks">
                            <div class="days">${element.activityTypes[j].Tasks[i].days}</div>
-// <<<<<<< feature/edit-button
                            <div class="taskName">${element.activityTypes[j].Tasks[i].taskName}</div>  
                            <button class="edit" onclick="editModal()"><i class="fa-solid fa-pen-to-square"></i></button>
                            <button class="delete" onclick="eraseData()"><i class="fa-solid fa-trash-can"></i></button>
@@ -244,16 +230,10 @@ myDailyCheckList.forEach((element, index) => {
            `
        }
        
-// =======
-//                        //    <div class="taskName">${element.activityTypes[j].Tasks[i].taskName}</div> 
-//                          // </div> 
-//                          //  <button class="delete" onclick="eraseData(${index}, ${j}, ${i})"><i class="fa-solid fa-trash-can"></i></button>
-//                       //  </div>`
-//            }
-//        }  
-// >>>>>>> main
    }
 });
+
+
 
 document.getElementById("initial-matrix").innerHTML = checkList
 
