@@ -18,11 +18,11 @@
     <header>
       <nav class="navbar">
         <a href="/" class="logo">
-          <img src="./images/logoDOM.jpg" alt="Team Logo" />
+          <img src="./images/logoDOM02.png" alt="Team Logo" />
         </a>
         <div class="search-container">
           <input type="text" placeholder="Search..." name="search" />
-          <button type="submit">Search</button>
+          <!-- <button type="submit">Search</button> -->
         </div>
         <button id="createTaskButton" class="createTaskButton">
           Create Task
@@ -179,13 +179,21 @@
 
     <!-- Main Content Section -->
     <div class="main-content">
-      <div class="matrix">
-        <div id="initial-matrix"></div>
-        <div>
-          <div id="days-of-month"></div>
+     <div class="matrix-title-days">
+       <div class="matrix">
+         <div id="matrix-title"></div>
+         <div id="initial-matrix"></div>
+       </div>
+       <div class="calendar">
+          <div class="title-days">
+           <div id="title-days"></div>
+          </div> 
+          <div class="days-of-month">
+            <div id="days-of-month"></div>
+          </div>
         </div>
-      </div>
-    </div>
+       </div>
+     </div>
 
     <!-- Footer Section -->
     <footer>
