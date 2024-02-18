@@ -179,14 +179,14 @@ body {
 #matrix-title > p{
   margin: 0;
   font-size: 0.85em;
-  padding: 0.9em 0;
+  padding: 0.65em 0;
   align-self: center;
 }
 
 .categoryName {
   background-color: rgb(169, 132, 203);
   font-size: 1rem;
-  padding: 0.5em 0;
+  padding: 0.75em 0;
   display: flex;
   justify-content: space-between;
 }
@@ -265,7 +265,7 @@ body {
   /* width: fit-content; */
   width: calc(100% / 7);
   font-size: 0.85rem;
-  padding: 0.25rem;
+  padding: 0.5rem;
   border: solid 1px rgb(88, 59, 109);
   background-color: rgb(169, 132, 203);
 }
@@ -336,7 +336,7 @@ body {
   .main-content {
     min-height: 500px;
   }
-/* calendar days */
+/* title*/
 #matrix-title {
   padding: 0.20em 0;
 } 
@@ -347,3 +347,14 @@ body {
   align-self: center;
 }
 }
+/* @media (max-width: 580px){
+  .days-month {
+    display: flex;
+    flex-direction: column-reverse;
+    width: calc(100% / 7);
+    font-size: 0.85rem;
+    padding: 0.5rem;
+    border: solid 1px rgb(88, 59, 109);
+    background-color: rgb(169, 132, 203);
+  }
+} */
