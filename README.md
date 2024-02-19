@@ -11,7 +11,6 @@ These tools often come with user-friendly interfaces, allowing users to easily n
 Overall, a daily task productivity tool aims to streamline task management, enhance organization, and improve efficiency in completing daily tasks and achieving goals.
 
 
-
 ## Features:
 
 ---
@@ -21,6 +20,7 @@ Overall, a daily task productivity tool aims to streamline task management, enha
 - Vanilla CSS
 
 ---
+
 ## Check out the Daily Task App!
 [Click Here](https://chingu-voyages.github.io/v47-tier1-team-05/) to visit the live project and try the Daily Task App for yourself!
 
