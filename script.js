@@ -169,13 +169,6 @@ function saveTaskToLocalStorage(task) {
     document.getElementById("initial-matrix").innerHTML = checkList;
   }
 
-
-// Use this code to console log the stored objects in the local storage array
-// const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-
-// tasks.forEach(function(task, index) {
-//     console.log(`Task ${index + 1}:`, task);
-// });
 fetch("./assets/tasks-example.json")
 .then(response => response.json())
 .then(data => {console.log(data)
@@ -183,10 +176,6 @@ localStorage.setItem("myTasks", JSON.stringify(data))
 
 })
 let myDailyCheckList = JSON.parse(localStorage.getItem("myTasks"))
-
-console.log(myDailyCheckList)
-console.log("extra", myDailyCheckList[2].categoryName)
-console.log("activities", myDailyCheckList[0].activityTypes.Tasks)
 
 let checkList = "";
 myDailyCheckList.forEach((element, index) => {
@@ -196,7 +185,6 @@ myDailyCheckList.forEach((element, index) => {
                       <button class="delete" onclick="eraseData(${index})"><i class="fa-solid fa-trash-can"></i></button>
                     </div>
                     </div>`
-   console.log(element.activityTypes, "length", element.activityTypes.length )
           for (let j = 0; j < element.activityTypes.length; j++){
              checkList += 
                          `<div class="activityName">
@@ -295,15 +283,11 @@ const d = new Date();
 const year = d.getFullYear();
 const month = d.getMonth();
 const day = d.getDay();
-console.log("d", d)
-// const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]
 const weekday = ["Su","M","Tu","W","Th","F","Sa"]
 const arrayOfMonths = ["January","February","March","April","May","June","July","August","September","October","November","December"];
 let monthName =arrayOfMonths[month]
 let dayName = weekday[day]
-console.log(dayName,monthName)
 const numDaysInMonth = (y,m) => new Date(y, m, 0).getDate();
-console.log("numofdays", numDaysInMonth(year, month+1))
 let totalNumDays = numDaysInMonth(year, month+1);
 
 
@@ -311,7 +295,6 @@ let displayDay = []
 let calendarDays = "";
 let firstDayOfMonth = "";
 const dd = new Date(`${monthName} 1, ${year}`)
-console.log("pls", dd)
 let displayMonth = []
 let calendarMonth = '';
 for(i = 1; i < (totalNumDays+1); i++){
