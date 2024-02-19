@@ -1,28 +1,34 @@
-# voyage-tasks
+## Overview
 
-Your project's `readme` is as important to success as your code. For 
-this reason you should put as much care into its creation and maintenance
-as you would any other component of the application.
+---
 
-If you are unsure of what should go into the `readme` let this article,
-written by an experienced Chingu, be your starting point - 
-[Keys to a well written README](https://tinyurl.com/yk3wubft).
+A daily task productivity tool is a system designed to help individuals organize and manage their tasks effectively on a day-to-day basis.
 
-And before we go there's "one more thing"! Once you decide what to include
-in your `readme` feel free to replace the text we've provided here.
+It typically includes features such as task creation, scheduling, prioritization, and tracking. Users can input tasks, assign deadlines, set priorities, categorize tasks based on projects or urgency, and monitor progress.
 
-> Own it & Make it your Own!
+These tools often come with user-friendly interfaces, allowing users to easily navigate, add, edit, and delete tasks. They may include features like reminders, notifications, and integrations with calendars or emails to keep users informed about upcoming tasks or deadlines.
 
-## Team Documents
+Overall, a daily task productivity tool aims to streamline task management, enhance organization, and improve efficiency in completing daily tasks and achieving goals.
 
-You may find these helpful as you work together to organize your project.
 
-- [Team Project Ideas](./docs/team_project_ideas.md)
-- [Team Decision Log](./docs/team_decision_log.md)
+## Features:
 
-Meeting Agenda templates (located in the `/docs` directory in this repo):
+---
 
-- Meeting - Voyage Kickoff --> ./docs/meeting-voyage_kickoff.docx
-- Meeting - App Vision & Feature Planning --> ./docs/meeting-vision_and_feature_planning.docx
-- Meeting - Sprint Retrospective, Review, and Planning --> ./docs/meeting-sprint_retrospective_review_and_planning.docx
-- Meeting - Sprint Open Topic Session --> ./docs/meeting-sprint_open_topic_session.docx
+- Responsive Design
+- Pure Vanilla Javascript
+- Vanilla CSS
+
+---
+
+## Check out the Daily Task App!
+[Click Here](https://chingu-voyages.github.io/v47-tier1-team-05/) to visit the live project and try the Daily Task App for yourself!
+
+---
+
+## Authors and Contributors
+
+- [Donovan](https://github.com/Dgibson89)
+- [Nandhini](https://github.com/Nandhini0123)
+- [Tyler Thietje](https://github.com/tylerthietje)
+- suruchipatki5
